@@ -9,17 +9,16 @@ export default {
   },
   data() {
     return {
-      ingredientes: [
-        "Alface",
-        "Bacon",
-        "Cenoura",
-        "Dente de alho",
-        "Ervilha",
-        "Sal",
-        "Pimenta",
-        "Maionese",
-      ],
+      ingredientes: [] as string[],
     };
+  },
+  methods: {
+    adicionarIngrediente(ingrediente: string) {
+      this.ingredientes.push(ingrediente);
+    },
+    removerIngrediente(ingrediente: string) {
+      this.ingredientes = this.ingredientes.filter((iLista) => iLista !== ingrediente);
+    },
   },
 };
 </script>
@@ -27,7 +26,10 @@ export default {
 <template>
   <main class="conteudo-principal">
     <SuaLista :ingredientes="ingredientes" />
-    <SelecionarIngredientes />
+    <SelecionarIngredientes
+      @adicionar-ingrediente="adicionarIngrediente"
+      @remover-ingrediente="removerIngrediente"
+    />
   </main>
 </template>
 
